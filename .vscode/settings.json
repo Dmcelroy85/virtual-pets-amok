@@ -2,5 +2,6 @@
     "cSpell.words": [
         "Intelli",
         "litterbox"
-    ]
+    ],
+    "java.compile.nullAnalysis.mode": "automatic"
 }

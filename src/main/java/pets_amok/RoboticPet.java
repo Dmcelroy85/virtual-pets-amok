@@ -1,5 +1,9 @@
 package pets_amok;
 
-public class RoboticPet {
-    
+public interface RoboticPet {
+	public abstract void addOil();
+
+	public abstract double getCurrentOilLevel();
+
+	public abstract boolean needsOil();
 }
