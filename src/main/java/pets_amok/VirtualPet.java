@@ -13,35 +13,27 @@ public abstract class VirtualPet {
 		this.happinessLevel = happinessLevel;
 		this.healthLevel = healthLevel;
 	}
-
 	public VirtualPet(String name, String description) {
 		this.name = name;
 		this.description = description;
 		this.happinessLevel = 100;
 		this.healthLevel = 100;
 	}
-
 	public abstract int tick();
-
 	public void play() {
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public String getDescription() {
 		return description;
 	}
-
 	public int getHappinessLevel() {
 		return happinessLevel;
 	}
-
 	public int getHealthLevel() {
 		return healthLevel;
 	}
-
 	@Override
 	public String toString() {
 		return "Name: " + name + " " + "Description: " + description + " " + " HappinessLevel: " + happinessLevel

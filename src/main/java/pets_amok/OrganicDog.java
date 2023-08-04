@@ -1,6 +1,5 @@
 package pets_amok;
 public class OrganicDog extends DogWalk implements OrganicPet {
-
 	// attributes
 	private int hungerLevel;
 	private int thirstLevel;
@@ -9,7 +8,6 @@ public class OrganicDog extends DogWalk implements OrganicPet {
 	private boolean needsToPee;
 	private boolean needsToPoop;
 	private boolean madeAMess;
-
 	public OrganicDog(String name, String desc) {
 		super(name, desc);
 		this.hungerLevel = 5;
@@ -20,7 +18,6 @@ public class OrganicDog extends DogWalk implements OrganicPet {
 		this.needsToPoop = false;
 		this.madeAMess = false;
 	}
-
 	public OrganicDog(String name, String desc, int happinessLevel, int healthLevel, int hungerLevel, int thirstLevel,
 			int excrementAmount) {
 		super(name, desc, happinessLevel, healthLevel);
@@ -32,7 +29,6 @@ public class OrganicDog extends DogWalk implements OrganicPet {
 		this.needsToPoop = false;
 		this.madeAMess = false;
 	}
-
 	public OrganicDog(String name, String desc, int happinessLevel, int healthLevel, int hungerLevel, int thirstLevel,
 			int exrementAmount, int activityLevel, boolean needsToPee, boolean needsToPoop, boolean madeAMess) {
 		super(name, desc, happinessLevel, healthLevel);
@@ -44,32 +40,25 @@ public class OrganicDog extends DogWalk implements OrganicPet {
 		this.needsToPoop = needsToPoop;
 		this.madeAMess = madeAMess;
 	}
-
 	// getters
 	public int getHungerLevel() {
 		return hungerLevel;
 	}
-
 	public int getThirstLevel() {
 		return thirstLevel;
 	}
-
 	public int getActivityLevel() {
 		return activityLevel;
 	}
-
 	public boolean getNeedsToPee() {
 		return needsToPee;
 	}
-
 	public boolean getNeedsToPoop() {
 		return needsToPoop;
 	}
-
 	public boolean getMadeAMess() {
 		return madeAMess;
 	}
-
 	@Override
 	public int tick() {
 		hungerLevel += 5;
@@ -83,19 +72,16 @@ public class OrganicDog extends DogWalk implements OrganicPet {
 		determineHealthAndHappinessLevels();
 		return generateWaste();
 	}
-
 	@Override
 	public void eat() {
 		hungerLevel = 0;
 		needsToPoop = true;
 	}
-
 	@Override
 	public void drink() {
 		thirstLevel = 0;
 		needsToPee = true;
 	}
-
 	@Override
 	public void walk() {
 		if (activityLevel < 75) {
@@ -106,7 +92,6 @@ public class OrganicDog extends DogWalk implements OrganicPet {
 		needsToPee = false;
 		needsToPoop = false;
 	}
-
 	@Override
 	public void play() {
 		if (activityLevel < 75) {
@@ -115,7 +100,6 @@ public class OrganicDog extends DogWalk implements OrganicPet {
 			activityLevel += 5;
 		}
 	}
-
 	// We need to reset needsToPee and needsToPoop here to false because otherwise
 	// the cage status will rarely be set to clean since the tick method determines
 	// clean or dirty based on needsToPee and needsToPoop and activity level.
@@ -126,7 +110,6 @@ public class OrganicDog extends DogWalk implements OrganicPet {
 		needsToPee = false;
 		needsToPoop = false;
 	}
-
 	// The dog only makes a mess in its cage under the worst of circumstances,
 	// therefore, return 0 if they did not have an "accident", otherwise return
 	// the waste amount. The calling program does not currently use this for
@@ -139,23 +122,18 @@ public class OrganicDog extends DogWalk implements OrganicPet {
 			return 0;
 		}
 	}
-
 	// The requirements are quoted below:
 	// "all pets lose health if their happiness drops too low"
 	// "a variable representing overall health that is updated as a result
 	// of other attributes moving in a negative or positive direction, influencing
 	// happiness"
 	private void determineHealthAndHappinessLevels() {
-
 		healthLevel = 0;
 		happinessLevel = 0;
-		// First, determine health based on hunger, thirst, activity level and litter
-		// box state.
-		// Note that hunger Level is 0 after being fed, 50 indicates hungry, 75
-		// extremely hungry.
+		// First, determine health based on hunger, thirst, activity level and litter box state.
+		// Note that hunger Level is 0 after being fed, 50 indicates hungry, 75 extremely hungry.
 		// Thirst is 0 after drinking, 50 indicates thirsty, 75 extremely thirsty.
-		// Activity level is initialized by default to 75, and is reset to 75 after
-		// playing.
+		// Activity level is initialized by default to 75, and is reset to 75 after playing.
 		// Activity level of less than 25 is an issue.
 		if (hungerLevel <= 75) {
 			healthLevel += 25;
@@ -170,8 +148,7 @@ public class OrganicDog extends DogWalk implements OrganicPet {
 			healthLevel += 25;
 		}
 
-		// Now consider the happiness level based on 20% health, 20% hunger, 20% thirst,
-		// 20% activity, and 20% litter box state
+		// Now consider the happiness level based on 20% health, 20% hunger, 20% thirst, 20% activity, and 20% litter box state
 		if (healthLevel >= 50) {
 			happinessLevel += 20;
 		}
@@ -187,7 +164,6 @@ public class OrganicDog extends DogWalk implements OrganicPet {
 		if (!madeAMess) {
 			happinessLevel += 20;
 		}
-
 		// If the pet is really unhappy, then take a little away from the health.
 		// But only if healthLevel is not equal to 0, because we do not want it
 		// to get to a negative level.
@@ -198,12 +174,10 @@ public class OrganicDog extends DogWalk implements OrganicPet {
 		}
 
 	}
-
 	@Override
 	public String toString() {
 		String returnString = name + ";" + description + ";" + hungerLevel + ";" + thirstLevel + ";" + activityLevel
 				+ ";" + needsToPee + ";" + needsToPoop + ";" + madeAMess;
 		return returnString;
 	}
-
 }

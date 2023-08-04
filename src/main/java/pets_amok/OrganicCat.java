@@ -39,7 +39,7 @@ public class OrganicCat extends VirtualPet implements OrganicPet {
 		activityLevel = 75;
 	}
 
-	// This overrides the abstract tick() method in the parent class - VirtualPet
+	// This overrides the tick() method in the parent class - VirtualPet
 	@Override
 	public int tick() {
 
@@ -56,22 +56,19 @@ public class OrganicCat extends VirtualPet implements OrganicPet {
 		environmentClean = clean;
 	}
 
-	// The requirements are quoted below:
-	// - "all pets lose health if their happiness drops too low"
-	// - "a variable representing overall health that is updated as a result
-	// of other attributes moving in a negative or positive direction, influencing
-	// happiness"
+	// Assignment requirements
+	// All pets lose health if their happiness drops too low"
+	// A variable representing overall health that is updated as a result
+	// 	of other attributes moving in a negative or positive direction, influencing
+	// 	happiness"
 	private void determineHealthAndHappinessLevels() {
 
 		healthLevel = 0;
 		happinessLevel = 0;
-		// First, determine health based on hunger, thirst, activity level and litter
-		// box state.
-		// Note that hunger Level is 0 after being fed, 50 indicates hungry, 75
-		// extremely hungry.
+		// First, determine health based on hunger, thirst, activity level and litter box state.
+		// Note that hunger Level is 0 after being fed, 50 indicates hungry, 75 extremely hungry.
 		// Thirst is 0 after drinking, 50 indicates thirsty, 75 extremely thirsty.
-		// Activity level is initialized by default to 75, and is reset to 75 after
-		// playing.
+		// Activity level is initialized by default to 75, and is reset to 75 after playing.
 		// Activity level of less than 10 is an issue.
 		if (hungerLevel <= 75) {
 			healthLevel += 25;
@@ -85,9 +82,7 @@ public class OrganicCat extends VirtualPet implements OrganicPet {
 		if (environmentClean) {
 			healthLevel += 25;
 		}
-
-		// Now consider the happiness level based on 20% health, 20% hunger, 20% thirst,
-		// 20% activity, and 20% litter box state
+		// The happiness level based on 20% health, 20% hunger, 20% thirst, 20% activity, and 20% litter box state
 		if (healthLevel >= 50) {
 			happinessLevel += 20;
 		}
@@ -103,7 +98,6 @@ public class OrganicCat extends VirtualPet implements OrganicPet {
 		if (environmentClean) {
 			happinessLevel += 20;
 		}
-
 		// If the pet is really unhappy, then take a little away from the health.
 		// But only if healthLevel is not equal to 0, because we do not want it
 		// to get to a negative level.
@@ -112,51 +106,39 @@ public class OrganicCat extends VirtualPet implements OrganicPet {
 				healthLevel -= 10;
 			}
 		}
-
-	} // end determineHealthAndHappinessLevels()
-
-	// The overrides below: eat(), drink(), generateWaste() and haveWasteCleanedUP()
-	// override the methods in the OrganicPet interface
+	}
+	// The overrides below: eat(), drink(), generateWaste() and haveWasteCleanedUP() override the methods in the OrganicPet interface
 	@Override
 	public void eat() {
 		hungerLevel = 0;
 	}
-
 	@Override
 	public void drink() {
 		thirstLevel = 0;
 	}
-
 	@Override
 	public int generateWaste() {
 		return excrementAmount;
 	}
-
 	@Override
 	public void haveWasteCleanedUp() {
 		environmentClean = true;
 	}
-
 	public boolean getLitterBoxStatus() {
 		return environmentClean;
 	}
-
 	public int getHungerLevel() {
 		return hungerLevel;
 	}
-
 	public int getThirstLevel() {
 		return thirstLevel;
 	}
-
 	public int getActivityLevel() {
 		return activityLevel;
 	}
-
 	@Override
 	public String toString() {
 		return (super.toString() + " HungerLevel: " + hungerLevel + " ThirstLevel " + thirstLevel + " ExcrementAmt "
 				+ excrementAmount);
 	}
-
 }

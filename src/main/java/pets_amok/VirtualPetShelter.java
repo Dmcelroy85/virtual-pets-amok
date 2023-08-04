@@ -19,35 +19,27 @@ public class VirtualPetShelter {
 	public Collection<VirtualPet> getAllPets() {
 		return pets.values();
 	}
-
 	public VirtualPet getPet(String name) {
 		return pets.get(name);
 	}
-
 	public int getNumberOfPets() {
 		return pets.size();
 	}
-
 	public int getLitterBoxWasteLevel() {
 		return shelterLitterBox.getWasteAmount();
 	}
-
 	public int getDogWasteAmount() {
 		return dogWasteAmount;
 	}
-
 	public Set<Entry<String, Integer>> getCageWasteList() {
 		return cageWaste.entrySet();
 	}
-
 	public void addPet(VirtualPet newPet) {
 		pets.put(newPet.getName(), newPet);
 	}
-
 	public VirtualPet releasePet(String name) {
 		return pets.remove(name);
 	}
-
 	public void feedPets() {
 		for (VirtualPet aPet : getAllPets()) {
 			if (aPet instanceof OrganicPet) {
@@ -55,7 +47,6 @@ public class VirtualPetShelter {
 			}
 		}
 	}
-
 	public void waterPets() {
 		for (VirtualPet aPet : getAllPets()) {
 			if (aPet instanceof OrganicPet) {
@@ -63,7 +54,6 @@ public class VirtualPetShelter {
 			}
 		}
 	}
-
 	public void oilRoboticPets() {
 		for (VirtualPet aPet : getAllPets()) {
 			if (aPet instanceof RoboticPet) {
@@ -71,15 +61,13 @@ public class VirtualPetShelter {
 			}
 		}
 	}
-
 	public void walkDogs() {
 		for (VirtualPet aPet : getAllPets()) {
-			if (aPet instanceof Dog) {
-				((Dog) aPet).walk();
+			if (aPet instanceof DogWalk) {
+				((DogWalk) aPet).walk();
 			}
 		}
 	}
-
 	public void cleanCages() {
 		for (VirtualPet aPet : getAllPets()) {
 			if (aPet instanceof OrganicDog) {
@@ -87,9 +75,7 @@ public class VirtualPetShelter {
 			}
 		}
 	}
-
-	// this immediately affects the health and happiness
-	// of the cats, so update their state here
+	// this immediately affects the health and happiness of the cats
 	public void cleanLitterBox() {
 		shelterLitterBox.clean();
 		for (VirtualPet aPet : getAllPets()) {
@@ -98,13 +84,11 @@ public class VirtualPetShelter {
 			}
 		}
 	}
-
 	public void tick() {
 		int catWasteAmount = 0;
 		int singleDogWasteAmount = 0;
 		dogWasteAmount = 0;
 		cageWaste.clear();
-
 		for (VirtualPet aPet : getAllPets()) {
 			if (aPet instanceof OrganicCat) {
 				((OrganicCat) aPet).setEnvironmentClean(shelterLitterBox.getStatus());
@@ -121,7 +105,6 @@ public class VirtualPetShelter {
 			}
 		}
 	}
-
 	// If a name is supplied that does not exist, the Virtual Pet object "returned"
 	// will be null. Just to be safe, check it for not null before using it,
 	// otherwise we could potentially crash with a null pointer exception.
